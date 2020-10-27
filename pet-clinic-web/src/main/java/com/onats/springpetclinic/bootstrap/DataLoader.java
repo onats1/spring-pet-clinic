@@ -2,20 +2,20 @@ package com.onats.springpetclinic.bootstrap;
 
 import com.onats.springpetclinic.model.Owner;
 import com.onats.springpetclinic.model.Vet;
-import com.onats.springpetclinic.services.maps.OwnerServiceMap;
-import com.onats.springpetclinic.services.maps.VetServiceMap;
+import com.onats.springpetclinic.services.OwnerService;
+import com.onats.springpetclinic.services.VetService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class DataLoader implements CommandLineRunner {
 
-    private final OwnerServiceMap ownerServiceMap;
-    private final VetServiceMap vetServiceMap;
+    private final OwnerService ownerService;
+    private final VetService vetService;
 
-    public DataLoader() {
-        ownerServiceMap = new OwnerServiceMap();
-        vetServiceMap = new VetServiceMap();
+    public DataLoader(OwnerService ownerService, VetService vetService) {
+        this.ownerService = ownerService;
+        this.vetService = vetService;
     }
 
     @Override
@@ -26,14 +26,14 @@ public class DataLoader implements CommandLineRunner {
         owner1.setFirstName("Onats");
         owner1.setLastName("Dami");
 
-        ownerServiceMap.save(owner1);
+        ownerService.save(owner1);
 
         Owner owner2 = new Owner();
         owner2.setId(2L);
         owner2.setFirstName("Precious");
         owner2.setLastName("Werey");
 
-        ownerServiceMap.save(owner2);
+        ownerService.save(owner2);
 
         System.out.println("Loaded owners..............................");
 
@@ -42,14 +42,14 @@ public class DataLoader implements CommandLineRunner {
         vet1.setId(1L);
         vet1.setLastName("Onats");
 
-        vetServiceMap.save(vet1);
+        vetService.save(vet1);
 
         Vet vet2 = new Vet();
         vet2.setFirstName("Tomisin");
         vet2.setId(1L);
         vet2.setLastName("Onats");
 
-        vetServiceMap.save(vet2);
+        vetService.save(vet2);
 
         System.out.println("Loaded Vets.............................");
     }
